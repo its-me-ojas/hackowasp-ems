@@ -64,7 +64,10 @@ func UpdateAttendanceHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Toggle the checkIn field
 	member.CheckedIn = !member.CheckedIn
-	member.Time = time.Now()
+	currentTime := time.Now()
+	fmt.Println("Current Time:", currentTime)
+
+	member.Time = currentTime
 
 	// Update the member in the database
 	update := bson.M{
@@ -77,10 +80,33 @@ func UpdateAttendanceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println("Member check-in status toggled successfully")
+	teamID := member.TeamID
+	if member.CheckedIn {
+		teamUpdate := bson.M{
+			"$inc": bson.M{"checkedInCount": 1},
+			// "$set": bson.M{"checkedIn": true},
+		}
+		// Update the team's checkedInCount
+		_, err = db.HackTeamCollection.UpdateOne(context.Background(), bson.M{"_id": teamID}, teamUpdate)
+	} else {
+		teamUpdate := bson.M{
+			"$inc": bson.M{"checkedInCount": -1},
+			// "$set": bson.M{"checkedIn": false},
+		}
+		// Update the team's checkedInCount
+		_, err = db.HackTeamCollection.UpdateOne(context.Background(), bson.M{"_id": teamID}, teamUpdate)
+
+	}
+	if err != nil {
+		http.Error(w, "Error updating team: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error updating team:", err)
+		return
+	}
+
+	fmt.Println("Member check-in status : ", member.CheckedIn)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"message": "Member check-in status toggled successfully"}`))
+	w.Write([]byte(`{"message": "Member check-in ", "status": "` + fmt.Sprint(member.CheckedIn) + `"}`))
 }
 
 func GetTeamByIDHandler(w http.ResponseWriter, r *http.Request) {
