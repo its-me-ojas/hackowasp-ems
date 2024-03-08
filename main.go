@@ -24,6 +24,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/team/{id}", GetTeamByIDHandler).Methods("GET")
 	router.HandleFunc("/member/{id}", GetMemberByIDHanlder).Methods("GET")
+	router.HandleFunc("/member/{id}", UpdateAttendanceHandler).Methods("PUT")
 	server := &http.Server{
 		Addr:    ":8080",
 		Handler: router,
@@ -36,6 +37,49 @@ func main() {
 	}()
 	waitForTerminationSignal(server)
 
+}
+func UpdateAttendanceHandler(w http.ResponseWriter, r *http.Request) {
+	memberIDBytes := r.URL.Path[len("/member/"):]
+	memberID := string(memberIDBytes)
+	fmt.Println(memberID)
+
+	if len(memberID) == 0 {
+		http.Error(w, "Member ID not provided", http.StatusBadRequest)
+		return
+	}
+	objID, err := primitive.ObjectIDFromHex(memberID)
+	if err != nil {
+		http.Error(w, "Invalid Member ID", http.StatusBadRequest)
+		return
+	}
+
+	// Retrieve the current member
+	var member model.HackMember
+	err = db.HackMemberCollection.FindOne(context.Background(), bson.M{"_id": objID}).Decode(&member)
+	if err != nil {
+		http.Error(w, "Error retrieving member: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error retrieving member:", err)
+		return
+	}
+
+	// Toggle the checkIn field
+	member.CheckedIn = !member.CheckedIn
+
+	// Update the member in the database
+	update := bson.M{
+		"$set": member,
+	}
+	_, err = db.HackMemberCollection.UpdateOne(context.Background(), bson.M{"_id": objID}, update)
+	if err != nil {
+		http.Error(w, "Error updating member: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error updating member:", err)
+		return
+	}
+
+	fmt.Println("Member check-in status toggled successfully")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"message": "Member check-in status toggled successfully"}`))
 }
 
 func GetTeamByIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -82,37 +126,37 @@ func GetTeamByIDHandler(w http.ResponseWriter, r *http.Request) {
 
 func GetMemberByIDHanlder(w http.ResponseWriter, r *http.Request) {
 	memberIDBytes := r.URL.Path[len("/member/"):]
-	teamID := string(memberIDBytes)
-	fmt.Println(teamID)
+	memberID := string(memberIDBytes)
+	fmt.Println(memberID)
 
-	if len(teamID) == 0 {
-		http.Error(w,"Member ID not provided", http.StatusBadRequest)
+	if len(memberID) == 0 {
+		http.Error(w, "Member ID not provided", http.StatusBadRequest)
 		return
 	}
-	objID,err:=primitive.ObjectIDFromHex(teamID)
-	if err!=nil{
-		http.Error(w,"Invalid Member ID", http.StatusBadRequest)
+	objID, err := primitive.ObjectIDFromHex(memberID)
+	if err != nil {
+		http.Error(w, "Invalid Member ID", http.StatusBadRequest)
 		return
 	}
 
-	filter:=bson.M{"_id":objID}
+	filter := bson.M{"_id": objID}
 
 	var member model.HackMember
-	err=db.HackMemberCollection.FindOne(context.Background(),filter).Decode(&member)
-	if err!=nil{
-		http.Error(w,"Error retrieving member: "+err.Error(), http.StatusInternalServerError)
-		log.Println("Error retrieving member:",err)
+	err = db.HackMemberCollection.FindOne(context.Background(), filter).Decode(&member)
+	if err != nil {
+		http.Error(w, "Error retrieving member: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error retrieving member:", err)
 		return
 	}
 
-	jsonBytes,err:=json.Marshal(member)
-	if err!=nil{
-		http.Error(w,"Error encoding member to JSON: "+err.Error(), http.StatusInternalServerError)
-		log.Println("Error encoding member to JSON:",err)
+	jsonBytes, err := json.Marshal(member)
+	if err != nil {
+		http.Error(w, "Error encoding member to JSON: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error encoding member to JSON:", err)
 		return
 	}
 
-	w.Header().Set("Content-Type","application/json")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonBytes)
 }
