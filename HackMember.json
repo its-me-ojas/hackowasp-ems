@@ -1,0 +1,222 @@
+[
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aa2" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aa1" },
+    "memberName": "Member 1",
+    "memberEmail": "member1@example.com",
+    "memberPhone": 1234567890,
+    "memberRoll": 123,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aa3" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aa1" },
+    "memberName": "Member 2",
+    "memberEmail": "member2@example.com",
+    "memberPhone": 2345678901,
+    "memberRoll": 234,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aa5" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aa4" },
+    "memberName": "Member 3",
+    "memberEmail": "member3@example.com",
+    "memberPhone": 3456789012,
+    "memberRoll": 345,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aa6" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aa4" },
+    "memberName": "Member 4",
+    "memberEmail": "member4@example.com",
+    "memberPhone": 4567890123,
+    "memberRoll": 456,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aa8" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aa7" },
+    "memberName": "Member 5",
+    "memberEmail": "member5@example.com",
+    "memberPhone": 5678901234,
+    "memberRoll": 567,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aa9" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aa7" },
+    "memberName": "Member 6",
+    "memberEmail": "member6@example.com",
+    "memberPhone": 6789012345,
+    "memberRoll": 678,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aab" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aaa" },
+    "memberName": "Member 7",
+    "memberEmail": "member7@example.com",
+    "memberPhone": 7890123456,
+    "memberRoll": 789,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aac" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aaa" },
+    "memberName": "Member 8",
+    "memberEmail": "member8@example.com",
+    "memberPhone": 8901234567,
+    "memberRoll": 890,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aae" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aad" },
+    "memberName": "Member 9",
+    "memberEmail": "member9@example.com",
+    "memberPhone": 9012345678,
+    "memberRoll": 901,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aaf" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3aad" },
+    "memberName": "Member 10",
+    "memberEmail": "member10@example.com",
+    "memberPhone": 1234567890,
+    "memberRoll": 123,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3ab1" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab0" },
+    "memberName": "Member 11",
+    "memberEmail": "member11@example.com",
+    "memberPhone": 2345678901,
+    "memberRoll": 234,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3ab2" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab0" },
+    "memberName": "Member 12",
+    "memberEmail": "member12@example.com",
+    "memberPhone": 3456789012,
+    "memberRoll": 345,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3ab4" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab3" },
+    "memberName": "Member 13",
+    "memberEmail": "member13@example.com",
+    "memberPhone": 3456789012,
+    "memberRoll": 345,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3ab5" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab3" },
+    "memberName": "Member 14",
+    "memberEmail": "member14@example.com",
+    "memberPhone": 4567890123,
+    "memberRoll": 456,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3ab7" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab6" },
+    "memberName": "Member 15",
+    "memberEmail": "member15@example.com",
+    "memberPhone": 4567890123,
+    "memberRoll": 456,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3ab8" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab6" },
+    "memberName": "Member 16",
+    "memberEmail": "member16@example.com",
+    "memberPhone": 5678901234,
+    "memberRoll": 567,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3aba" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab9" },
+    "memberName": "Member 17",
+    "memberEmail": "member17@example.com",
+    "memberPhone": 5678901234,
+    "memberRoll": 567,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3abb" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3ab9" },
+    "memberName": "Member 18",
+    "memberEmail": "member18@example.com",
+    "memberPhone": 6789012345,
+    "memberRoll": 678,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3abd" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3abc" },
+    "memberName": "Member 19",
+    "memberEmail": "member19@example.com",
+    "memberPhone": 6789012345,
+    "memberRoll": 678,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "60950f8a127b5b000d2a3abe" },
+    "teamID": { "$oid": "60950f8a127b5b000d2a3abc" },
+    "memberName": "Member 20",
+    "memberEmail": "member20@example.com",
+    "memberPhone": 7890123456,
+    "memberRoll": 789,
+    "checkedIn": false,
+    "time": "2024-03-11T12:34:56Z",
+    "__v": 1
+  }
+]

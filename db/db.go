@@ -11,7 +11,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var Collection *mongo.Collection
+var HackTeamCollection *mongo.Collection
+var HackMemberCollection *mongo.Collection
 
 func InitDatabase() {
 	err := godotenv.Load(".env")
@@ -28,6 +29,7 @@ func InitDatabase() {
 	// defer client.Disconnect(context.Background())
 
 	fmt.Println("Connected to MongoDB!")
-	Collection = client.Database("Hackathon").Collection("HackTeam")
+	HackTeamCollection = client.Database("Hackathon").Collection("HackTeam")
+	HackMemberCollection = client.Database("Hackathon").Collection("HackMember")
 
 }
