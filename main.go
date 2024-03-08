@@ -64,6 +64,7 @@ func UpdateAttendanceHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Toggle the checkIn field
 	member.CheckedIn = !member.CheckedIn
+	member.Time = time.Now()
 
 	// Update the member in the database
 	update := bson.M{
