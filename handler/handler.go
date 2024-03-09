@@ -1,22 +1,85 @@
-package main
+package handler
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-
 	"hackowasp_ems/db"
 	"hackowasp_ems/model"
 	"log"
 	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
+
+func GetAllMembersHandler(w http.ResponseWriter, r *http.Request) {
+	// Retrieve all members from the database
+	members, err := db.HackMemberCollection.Find(context.Background(), bson.M{})
+	if err != nil {
+		http.Error(w, "Error retrieving members: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error retrieving members:", err)
+		return
+	}
+
+	var allMembers []model.HackMember
+	for members.Next(context.Background()) {
+		var member model.HackMember
+		err := members.Decode(&member)
+		if err != nil {
+			http.Error(w, "Error decoding member: "+err.Error(), http.StatusInternalServerError)
+			log.Println("Error decoding member:", err)
+			return
+		}
+		allMembers = append(allMembers, member)
+	}
+
+	jsonBytes, err := json.Marshal(allMembers)
+	if err != nil {
+		http.Error(w, "Error encoding members to JSON: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error encoding members to JSON:", err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+
+}
+
+func GetAllTeamsHandler(w http.ResponseWriter, r *http.Request) {
+	// Retrieve all teams from the database
+	teams, err := db.HackTeamCollection.Find(context.Background(), bson.M{})
+	if err != nil {
+		http.Error(w, "Error retrieving teams: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error retrieving teams:", err)
+		return
+	}
+
+	var allTeams []model.HackTeam
+	for teams.Next(context.Background()) {
+		var team model.HackTeam
+		err := teams.Decode(&team)
+		if err != nil {
+			http.Error(w, "Error decoding team: "+err.Error(), http.StatusInternalServerError)
+			log.Println("Error decoding team:", err)
+			return
+		}
+		allTeams = append(allTeams, team)
+	}
+
+	jsonBytes, err := json.Marshal(allTeams)
+	if err != nil {
+		http.Error(w, "Error encoding teams to JSON: "+err.Error(), http.StatusInternalServerError)
+		log.Println("Error encoding teams to JSON:", err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+}
 
 func UpdateAttendanceHandler(w http.ResponseWriter, r *http.Request) {
 	memberIDBytes := r.URL.Path[len("/member/"):]
@@ -166,17 +229,4 @@ func GetMemberByIDHanlder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonBytes)
-}
-
-func waitForTerminationSignal(server *http.Server) {
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	<-quit
-	log.Println("Server is shutting down...")
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
-	if err := server.Shutdown(ctx); err != nil {
-		log.Fatalf("Server shutdown failed: %v\n", err)
-	}
-	log.Println("Server stopped gracefully")
 }
