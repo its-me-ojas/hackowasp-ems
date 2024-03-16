@@ -7,4 +7,4 @@
 - [ ] table allotment
 - [ ] evaluation (to be discussed in core)
 - [ ] dynamic schema for evaluation paramaters ( web app ) ( cheap ass design )
-- [ ] design website 
+- [x] design website 
