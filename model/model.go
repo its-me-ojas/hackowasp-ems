@@ -26,9 +26,14 @@ type HackTeam struct {
 	Members        []HackMember       `json:"members"`
 	CheckedIn      bool               `json:"checkedIn"`
 	CheckedInCount int                `json:"checkedInCount"`
+	TableNumber    int                `json:"tableNumber"`
 	TotalMembers   int                `json:"totalMembers"`
 	LeaderName     string             `json:"leaderName"`
+	RoundReview    []Pair             `json:"roundReview"`
 	Selected       bool               `json:"selected"`
-	Locked         bool               `json:"locked"`
-	Waitlist       bool               `json:"waitlist"`
+}
+
+type Pair struct {
+	First  int
+	Second string
 }
